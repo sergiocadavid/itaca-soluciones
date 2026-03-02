@@ -1,0 +1,147 @@
+{
+    "forms": {
+        "A": [
+            {
+                "id": "A_01",
+                "domain": "Liderazgo y Relaciones",
+                "dimension": "Características del liderazgo",
+                "text": "Mi jefe me da instrucciones claras sobre lo que debo hacer.",
+                "reverse": false
+            },
+            {
+                "id": "A_02",
+                "domain": "Control",
+                "dimension": "Claridad de rol",
+                "text": "Tengo claro cuáles son mis funciones.",
+                "reverse": false
+            },
+            {
+                "id": "A_03",
+                "domain": "Demandas del Trabajo",
+                "dimension": "Demandas Cuantitativas",
+                "text": "El tiempo que tengo para hacer mi trabajo es insuficiente.",
+                "reverse": true
+            },
+            {
+                "id": "A_04",
+                "domain": "Liderazgo y Relaciones",
+                "dimension": "Relación con colaboradores",
+                "text": "Mis compañeros me ayudan cuando tengo dificultades.",
+                "reverse": false
+            },
+            {
+                "id": "A_05",
+                "domain": "Recompensas",
+                "dimension": "Reconocimiento y compensación",
+                "text": "Siento orgullo de trabajar en esta empresa.",
+                "reverse": false
+            }
+        ],
+        "B": [
+            {
+                "id": "B_01",
+                "domain": "Liderazgo y Relaciones",
+                "dimension": "Características del liderazgo",
+                "text": "Mi jefe me trata con respeto.",
+                "reverse": false
+            },
+            {
+                "id": "B_02",
+                "domain": "Demandas del Trabajo",
+                "dimension": "Exigencias de responsabilidad del cargo",
+                "text": "Me preocupa cometer errores en mi trabajo.",
+                "reverse": true
+            },
+            {
+                "id": "B_03",
+                "domain": "Control",
+                "dimension": "Autonomía",
+                "text": "Puedo decidir el orden en que hago mis tareas.",
+                "reverse": false
+            },
+            {
+                "id": "B_04",
+                "domain": "Demandas del Trabajo",
+                "dimension": "Demandas de la jornada de trabajo",
+                "text": "Trabajo horas extras con frecuencia.",
+                "reverse": true
+            },
+            {
+                "id": "B_05",
+                "domain": "Recompensas",
+                "dimension": "Sentimiento de pertenencia",
+                "text": "La empresa se preocupa por mi bienestar.",
+                "reverse": false
+            }
+        ],
+        "stress": [
+            {
+                "id": "S_01",
+                "dimension": "Fisiológico",
+                "text": "Dolores de cabeza frecuentes."
+            },
+            {
+                "id": "S_02",
+                "dimension": "Fisiológico",
+                "text": "Problemas gastrointestinales."
+            },
+            {
+                "id": "S_03",
+                "dimension": "Psicoemocional",
+                "text": "Sentimiento de ansiedad o angustia."
+            },
+            {
+                "id": "S_04",
+                "dimension": "Cognitivo",
+                "text": "Dificultad para concentrarse."
+            },
+            {
+                "id": "S_05",
+                "dimension": "Laboral",
+                "text": "Deseo de no asistir al trabajo."
+            }
+        ],
+        "extralaboral": [
+            {
+                "id": "E_01",
+                "dimension": "Tiempo fuera del trabajo",
+                "text": "El tiempo que paso con mi familia es suficiente.",
+                "reverse": false
+            },
+            {
+                "id": "E_02",
+                "dimension": "Relaciones familiares",
+                "text": "Tengo una buena comunicación con mi familia.",
+                "reverse": false
+            },
+            {
+                "id": "E_03",
+                "dimension": "Situación económica",
+                "text": "El dinero que gano me alcanza para cubrir mis necesidades básicas.",
+                "reverse": false
+            }
+        ]
+    },
+    "options": [
+        {
+            "label": "Siempre",
+            "value": 4
+        },
+        {
+            "label": "Casi siempre",
+            "value": 3
+        },
+        {
+            "label": "Algunas veces",
+            "value": 2
+        },
+        {
+            "label": "Casi nunca",
+            "value": 1
+        },
+        {
+            "label": "Nunca",
+            "value": 0
+        }
+    ]
+}

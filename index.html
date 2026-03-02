@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itaca Soluciones - Batería de Riesgo Psicosocial</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo-container">
+            <h1>Itaca Soluciones</h1>
+            <p>Seguridad y Salud en el Trabajo</p>
+        </div>
+        <div id="user-info" class="hidden">
+            <span id="user-name"></span>
+            <button id="logout-btn" class="btn-secondary">Salir</button>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <section id="login-view" class="view">
+            <div class="login-card">
+                <div class="login-image">
+                    <img src="https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                        alt="Bienestar Laboral">
+                </div>
+                <div class="login-form">
+                    <h2>Bienvenido</h2>
+                    <p class="motivational-text">Tu bienestar es nuestra prioridad. Ayúdanos a construir un mejor
+                        entorno laboral.</p>
+                    <div class="form-group">
+                        <label for="cedula-input">Ingresa tu número de cédula</label>
+                        <input type="number" id="cedula-input" placeholder="Ej: 10101001" required>
+                        <p id="login-error" class="error-msg"></p>
+                    </div>
+                    <button id="login-btn" class="btn-primary">Ingresar</button>
+
+
+                    <div class="admin-link">
+                        <a href="#" id="admin-login-link">Acceso Administrativo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="consent-view" class="view hidden">
+            <div class="card">
+                <h2>Consentimiento Informado</h2>
+                <div class="scrollable-content">
+                    <p>Yo, identificado con la cédula ingresada, acepto participar voluntariamente en la evaluación de
+                        Factores de Riesgo Psicosocial de Itaca Soluciones.</p>
+                    <p>Entiendo que:</p>
+                    <ul>
+                        <li>Mis respuestas son confidenciales y están protegidas por el secreto profesional (Ley 1090 de
+                            2006).</li>
+                        <li>Los resultados individuales solo serán conocidos por el Psicólogo Especialista.</li>
+                        <li>La empresa solo recibirá informes de resultados grupales.</li>
+                        <li>La información recolectada se utilizará únicamente con fines de intervención.</li>
+                    </ul>
+                </div>
+                <div class="consent-actions">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="consent-check">
+                        <span class="checkmark"></span>
+                        Acepto participar voluntariamente
+                    </label>
+                    <button id="go-to-demographics-btn" class="btn-primary" disabled>Continuar</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="demographic-view" class="view hidden">
+            <div class="card">
+                <h2>Ficha de Datos Generales</h2>
+                <p>Por favor, completa la siguiente información sociodemográfica obligatoria.</p>
+                <form id="demographic-form">
+                    <div class="form-grid"
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left;">
+                        <div class="form-group">
+                            <label>Nivel de Estudios</label>
+                            <select id="demo-education" required>
+                                <option value="">Seleccione...</option>
+                                <option value="primaria">Primaria</option>
+                                <option value="secundaria">Bachillerato</option>
+                                <option value="tecnico">Técnico</option>
+                                <option value="tecnologo">Tecnólogo</option>
+                                <option value="profesional">Profesional</option>
+                                <option value="postgrado">Postgrado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado Civil</label>
+                            <select id="demo-marital" required>
+                                <option value="">Seleccione...</option>
+                                <option value="soltero">Soltero(a)</option>
+                                <option value="casado">Casado(a)</option>
+                                <option value="union_libre">Unión Libre</option>
+                                <option value="separado">Separado(a)</option>
+                                <option value="viudo">Viudo(a)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Personas a cargo</label>
+                            <input type="number" id="demo-dependents" min="0" max="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Lugar de Residencia</label>
+                            <input type="text" id="demo-residence" placeholder="Ciudad/Municipio" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Estrato Socioeconómico</label>
+                            <select id="demo-stratum" required>
+                                <option value="">Seleccione...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Vivienda</label>
+                            <select id="demo-housing" required>
+                                <option value="">Seleccione...</option>
+                                <option value="propia">Propia</option>
+                                <option value="arrendada">Arrendada</option>
+                                <option value="familiar">Familiar</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Antigüedad en el cargo (años)</label>
+                            <input type="number" id="demo-seniority" min="0" step="0.5" required>
+                        </div>
+                    </div>
+                </form>
+                <div class="consent-actions" style="margin-top: 20px;">
+                    <button id="start-survey-btn" class="btn-primary">Comenzar Encuesta</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="survey-view" class="view hidden">
+            <div class="survey-header">
+                <h3 id="survey-title">Cuestionario Intralaboral</h3>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <span id="progress-text">0%</span>
+                </div>
+            </div>
+            <div id="questions-container"></div>
+            <div class="survey-navigation">
+                <button id="prev-btn" class="btn-secondary hidden">Anterior</button>
+                <button id="next-btn" class="btn-primary">Siguiente</button>
+            </div>
+        </section>
+
+        <section id="result-view" class="view hidden">
+            <div class="card success-card">
+                <div class="icon-check" style="font-size: 4rem; color: #27ae60;">✓</div>
+                <h2>¡Muchas gracias!</h2>
+                <p>Has completado la evaluación exitosamente.</p>
+                <div class="result-actions">
+                    <button id="download-report-btn" class="btn-secondary">Descargar Mi Informe</button>
+                    <button id="finish-btn" class="btn-primary">Salir</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard-view" class="view hidden">
+            <div class="dashboard-header">
+                <h2>Panel de Control - Riesgo Psicosocial</h2>
+                <div class="dashboard-controls">
+                    <button id="simulate-data-btn" class="btn-small" style="background: #9c27b0; color: white;">Simular
+                        Datos</button>
+                    <button id="reset-data-btn" class="btn-small" style="background: #f44336; color: white;">Reset
+                        DB</button>
+                    <button id="download-general-report-btn" class="btn-small"
+                        style="background: #2196F3; color: white;">Informe General</button>
+                    <button id="view-participation-btn" class="btn-small"
+                        style="background: #FF9800; color: white;">Control Asistencia</button>
+                    <button id="view-individual-results-btn" class="btn-small"
+                        style="background: #607D8B; color: white;">Resultados Individuales</button>
+                    <select id="area-filter">
+                        <option value="all">Todas las Áreas</option>
+                        <option value="Gerencia">Gerencia</option>
+                        <option value="Administración">Administración</option>
+                        <option value="Operaciones">Operaciones</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <h3>Participación</h3>
+                    <div class="stat-value" id="participation-stat">0%</div>
+                    <p id="participation-detail">0 de 50 evaluados</p>
+                </div>
+                <div class="stat-card risk-card">
+                    <h3>Riesgo Intralaboral</h3>
+                    <div class="risk-meter">
+                        <div class="risk-level" id="intra-risk-level">--</div>
+                    </div>
+                </div>
+                <div class="stat-card risk-card">
+                    <h3>Nivel de Estrés</h3>
+                    <div class="risk-meter">
+                        <div class="risk-level" id="stress-risk-level">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Mapa de Calor por Áreas</h3>
+                <div id="heatmap-container"></div>
+            </div>
+
+            <div id="participation-section" class="hidden"
+                style="margin-top: 20px; background: white; padding: 20px; border-radius: 8px;">
+                <h3>Control de Asistencia</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: #f5f5f5;">
+                        <tr>
+                            <th style="padding: 8px;">Cédula</th>
+                            <th style="padding: 8px;">Nombre</th>
+                            <th style="padding: 8px;">Área</th>
+                            <th style="padding: 8px;">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="participation-table-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <div id="individual-results-section" class="hidden"
+            style="margin: 20px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>Resultados Individuales</h3>
+                <button onclick="document.getElementById('individual-results-section').classList.add('hidden')"
+                    class="btn-secondary">Cerrar</button>
+            </div>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <thead style="background: #f5f5f5;">
+                    <tr>
+                        <th style="padding: 8px; text-align: left;">Fecha</th>
+                        <th style="padding: 8px; text-align: left;">Nombre</th>
+                        <th style="padding: 8px; text-align: left;">Área</th>
+                        <th style="padding: 8px; text-align: left;">Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="individual-results-body"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p style="text-align: center; color: var(--text-secondary); padding: 20px 0; margin: 0; font-size: 0.9rem;">
+            &copy; 2026 Itaca Soluciones S.A.S. - Todos los derechos reservados.
+        </p>
+    </footer>
+
+    <!-- Scripts: Data first sequentially, then the module app entry point -->
+    <script src="js/data.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
