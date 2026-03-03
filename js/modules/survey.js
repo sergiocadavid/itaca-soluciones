@@ -112,9 +112,7 @@ export const saveTempProgress = () => {
     }
 };
 
-export const finishSurvey = () => {
-    const db = JSON.parse(localStorage.getItem('itaca_results') || '[]');
-
+export const finishSurvey = async () => {
     const niveles = ['Muy Bajo', 'Bajo', 'Medio', 'Alto', 'Muy Alto'];
     const result = {
         uuid: Math.random().toString(36).substr(2, 9).toUpperCase(),
@@ -127,29 +125,32 @@ export const finishSurvey = () => {
         date: new Date().toLocaleString()
     };
 
-    db.push(result);
-    localStorage.setItem('itaca_results', JSON.stringify(db));
+    try {
+        // Guardar en la nube en lugar de local
+        const { db, collection, addDoc } = await import('../firebase-config.js');
+        await addDoc(collection(db, "results"), result);
 
-    const log = JSON.parse(localStorage.getItem('itaca_participation_log') || '[]');
-    if (!log.includes(state.currentUser.id)) log.push(state.currentUser.id);
-    localStorage.setItem('itaca_participation_log', JSON.stringify(log));
+        // Remover progreso temporal local
+        localStorage.removeItem(`itaca_temp_${state.currentUser.id}`);
 
-    localStorage.removeItem(`itaca_temp_${state.currentUser.id}`);
+        views.result.innerHTML = `
+            <div class="card" style="max-width: 600px; margin: 50px auto; text-align: center; padding: 40px; border-top: 8px solid #27ae60;">
+                <div style="font-size: 50px; color: #27ae60; margin-bottom: 20px;">✔️</div>
+                <h2 style="color: #2c3e50; font-size: 1.8rem;">Evaluación Finalizada y Guardada de Forma Segura en la Nube</h2>
+                <p style="color: #7f8c8d; font-size: 1.1rem; line-height: 1.6; margin: 20px 0;">
+                    Estimado(a) <strong>${state.currentUser.name}</strong>,<br><br>
+                    Agradecemos su valiosa participación en la batería de riesgo psicosocial de <strong>Itaca Soluciones S.A.S.</strong><br><br>
+                    Sus respuestas han sido centralizadas bajo estricta reserva legal. La información recolectada es fundamental para el fortalecimiento de nuestros programas de bienestar y salud ocupacional.
+                </p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+                <button id="logout-finish-btn" class="btn-primary" style="padding: 15px 30px;">CERRAR SESIÓN</button>
+            </div>
+        `;
 
-    views.result.innerHTML = `
-        <div class="card" style="max-width: 600px; margin: 50px auto; text-align: center; padding: 40px; border-top: 8px solid #27ae60;">
-            <div style="font-size: 50px; color: #27ae60; margin-bottom: 20px;">✔️</div>
-            <h2 style="color: #2c3e50; font-size: 1.8rem;">Evaluación Finalizada Exitosamente</h2>
-            <p style="color: #7f8c8d; font-size: 1.1rem; line-height: 1.6; margin: 20px 0;">
-                Estimado(a) <strong>${state.currentUser.name}</strong>,<br><br>
-                Agradecemos su valiosa participación en la batería de riesgo psicosocial de <strong>Itaca Soluciones S.A.S.</strong><br><br>
-                Sus respuestas han sido registradas bajo estricta reserva legal. La información recolectada es fundamental para el fortalecimiento de nuestros programas de bienestar y salud ocupacional.
-            </p>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-            <button id="logout-finish-btn" class="btn-primary" style="padding: 15px 30px;">CERRAR SESIÓN</button>
-        </div>
-    `;
-
-    document.getElementById('logout-finish-btn').onclick = () => location.reload();
-    switchView('result');
+        document.getElementById('logout-finish-btn').onclick = () => location.reload();
+        switchView('result');
+    } catch (e) {
+        console.error("Error guardando en Firebase: ", e);
+        alert("Ocurrió un error de conexión al guardar sus respuestas. Por favor, reintente en unos momentos.");
+    }
 };

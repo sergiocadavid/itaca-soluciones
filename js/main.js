@@ -42,7 +42,7 @@ const setupEventListeners = () => {
 
     // Dashboard features
     const btnSimular = document.getElementById('simulate-data-btn');
-    if (btnSimular) btnSimular.onclick = simulate;
+    if (btnSimular) btnSimular.onclick = () => simulate();
 
     const btnPart = document.getElementById('view-participation-btn');
     if (btnPart) btnPart.onclick = renderParticipationTable;
