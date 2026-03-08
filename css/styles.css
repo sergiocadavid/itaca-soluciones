@@ -34,6 +34,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     margin: 0;
     padding: 0;
     color: var(--text-main);
@@ -41,38 +42,21 @@ body {
     justify-content: center;
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
-    /* SST Background corregido */
+    /* SST Background: Safety Helmet and Plans - clearer visibility */
     background-image: linear-gradient(rgba(243, 244, 246, 0.4), rgba(243, 244, 246, 0.6)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
-/* --- CAMBIO: CONTENEDOR VERTICAL --- */
 .app-container {
-    display: flex;
-    flex-direction: column; 
     width: 100%;
     max-width: 900px;
-    margin: 20px auto;
-    min-height: 90vh;
-}
-
-/* --- CAMBIO: BARRA SUPERIOR HORIZONTAL --- */
-.sidebar {
-    width: 100%;
-    height: auto;
-    background: var(--card-bg);
+    margin: 20px;
+    background-color: transparent;
     display: flex;
-    flex-direction: row; /* Horizontal */
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    box-shadow: var(--shadow-md);
-    border-radius: var(--radius-lg);
-    margin-bottom: 2rem;
-    box-sizing: border-box;
-    z-index: 100;
+    flex-direction: column;
+    min-height: 90vh;
 }
 
 /* Header */
@@ -87,6 +71,7 @@ body {
     margin-bottom: 2rem;
     border-left: 5px solid var(--primary-color);
     width: 100%;
+    flex-direction: row;
     box-sizing: border-box;
 }
 
@@ -123,6 +108,7 @@ body {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -263,7 +249,6 @@ body {
     transition: all 0.3s;
     background-color: #F9FAFB;
     font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -273,29 +258,17 @@ body {
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
-/* --- CAMBIO: SEPARACIÓN DEL LINK ADMIN (50px) --- */
-.admin-link {
-    display: block;
-    margin-top: 50px; 
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: color 0.3s;
-    font-weight: 500;
-}
-
-.admin-link:hover {
-    color: var(--primary-color);
-    text-decoration: underline;
-}
-
 .error-msg {
     color: var(--danger-color);
     font-size: 0.85rem;
     margin-top: 8px;
     min-height: 1.25em;
     font-weight: 500;
+}
+
+.admin-link {
+    margin-top: 60px;
+    text-align: center;
 }
 
 /* Survey View */
@@ -312,7 +285,6 @@ body {
     height: 12px;
     margin-top: 15px;
     overflow: hidden;
-    width: 100%;
 }
 
 .progress-bar {
@@ -366,8 +338,6 @@ body {
     color: var(--text-main);
     display: flex;
     align-items: center;
-    width: 100%;
-    box-sizing: border-box;
 }
 
 .option-btn:hover {
@@ -393,7 +363,6 @@ body {
     border-radius: 50%;
     margin-right: 15px;
     transition: all 0.2s;
-    flex-shrink: 0;
 }
 
 .option-btn.selected::before {
@@ -477,16 +446,57 @@ select {
     font-size: 0.9rem;
 }
 
-/* Chart Container */
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    .print-hidden,
+    .app-container {
+        display: none !important;
+    }
+
+    #printable-report,
+    #printable-general-report {
+        display: none;
+    }
+
+    body.print-mode-individual #printable-report,
+    body.print-mode-general #printable-general-report {
+        display: block !important;
+        position: static;
+        width: 100%;
+        margin: 0;
+        padding: 40px;
+    }
+
+    /* Elegant Print Layout */
+    .report-header {
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .report-body h3 {
+        color: var(--primary-dark);
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        margin-top: 30px;
+    }
+}
+
 .chart-container {
     width: 100%;
     background-color: var(--card-bg);
     padding: 2rem;
     border-radius: 8px;
-    box-sizing: border-box;
 }
 
-/* Success Card */
+/* Success */
 .success-card {
     text-align: center;
 }
@@ -497,9 +507,63 @@ select {
     margin-bottom: 1rem;
 }
 
-/* printable-report */
+/* Printable Report Styles */
 .printable-hidden {
     display: none;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .app-container,
+    header,
+    .view {
+        display: none !important;
+    }
+
+    #printable-report,
+    #printable-report * {
+        visibility: visible;
+    }
+
+    #printable-report {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 40px;
+        background: white;
+    }
+
+    .report-header {
+        border-bottom: 2px solid var(--primary-color);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .report-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 30px;
+        background: #f9f9f9;
+        border: 1px solid #eee;
+        padding: 15px;
+    }
+
+    .signature-section {
+        margin-top: 100px;
+        width: 300px;
+        text-align: center;
+        page-break-inside: avoid;
+    }
+
+    .signature-line {
+        border-top: 1px solid black;
+        margin-bottom: 10px;
+    }
 }
 
 .result-actions {
@@ -509,33 +573,13 @@ select {
     margin-top: 20px;
 }
 
-/* Impresión Completa */
-@media print {
-    body * { visibility: hidden; }
-    #printable-report, #printable-report *, #printable-general-report, #printable-general-report * { visibility: visible; }
-    #printable-report, #printable-general-report {
-        display: block !important;
-        position: absolute;
-        left: 0; top: 0; width: 100%;
-        padding: 40px; background: white;
-    }
-    .report-header {
-        border-bottom: 2px solid var(--primary-color);
-        margin-bottom: 20px; padding-bottom: 10px;
-        display: flex; justify-content: space-between; align-items: center;
-    }
-    .report-meta {
-        display: grid; grid-template-columns: 1fr 1fr;
-        margin-bottom: 30px; background: #f9f9f9;
-        border: 1px solid #eee; padding: 15px;
-    }
-    .signature-section {
-        margin-top: 100px; width: 300px;
-        text-align: center; page-break-inside: avoid;
-    }
-    .signature-line { border-top: 1px solid black; margin-bottom: 10px; }
-    .report-body h3 {
-        color: var(--primary-dark); border-bottom: 1px solid #eee;
-        padding-bottom: 5px; margin-top: 30px;
-    }
+.btn-small {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    background: #666;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
 }
