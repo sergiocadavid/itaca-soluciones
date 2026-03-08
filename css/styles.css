@@ -35,7 +35,7 @@ body {
     background-attachment: fixed;
 }
 
-/* --- CAMBIO: CONTENEDOR VERTICAL --- */
+/* CONTENEDOR PRINCIPAL: Ahora fluye hacia abajo */
 .app-container {
     display: flex;
     flex-direction: column; 
@@ -45,13 +45,13 @@ body {
     min-height: 90vh;
 }
 
-/* --- CAMBIO: BARRA SUPERIOR HORIZONTAL --- */
+/* BARRA SUPERIOR (Antes era vertical a la izquierda) */
 .sidebar {
     width: 100%;
     height: auto;
     background: var(--card-bg);
     display: flex;
-    flex-direction: row; 
+    flex-direction: row; /* Horizontal */
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
@@ -92,9 +92,7 @@ body {
 }
 
 /* Utils & Animations */
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
 .view {
     flex: 1;
@@ -106,14 +104,8 @@ body {
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Buttons */
@@ -260,7 +252,7 @@ body {
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
-/* --- CAMBIO: SEPARACIÓN DEL LINK ADMIN --- */
+/* SEPARACIÓN DEL LINK ADMIN: 50px */
 .admin-link {
     display: block;
     margin-top: 50px; 
@@ -483,7 +475,11 @@ select {
     margin-bottom: 1rem;
 }
 
-/* Resultados e Impresión Completa */
+/* printable-report */
+.printable-hidden {
+    display: none;
+}
+
 .result-actions {
     display: flex;
     gap: 10px;
@@ -491,76 +487,33 @@ select {
     margin-top: 20px;
 }
 
-.printable-hidden {
-    display: none;
-}
-
+/* Impresión Completa */
 @media print {
-    body * {
-        visibility: hidden;
-    }
-
-    .app-container,
-    header,
-    .sidebar,
-    .view,
-    .print-hidden,
-    #participation-section,
-    #individual-results-section {
-        display: none !important;
-    }
-
-    #printable-report,
-    #printable-report *,
-    #printable-general-report,
-    #printable-general-report * {
-        visibility: visible;
-    }
-
+    body * { visibility: hidden; }
+    #printable-report, #printable-report *, #printable-general-report, #printable-general-report * { visibility: visible; }
     #printable-report, #printable-general-report {
         display: block !important;
         position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        padding: 40px;
-        background: white;
+        left: 0; top: 0; width: 100%;
+        padding: 40px; background: white;
     }
-
     .report-header {
         border-bottom: 2px solid var(--primary-color);
-        margin-bottom: 20px;
-        padding-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        margin-bottom: 20px; padding-bottom: 10px;
+        display: flex; justify-content: space-between; align-items: center;
     }
-
     .report-meta {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        margin-bottom: 30px;
-        background: #f9f9f9;
-        border: 1px solid #eee;
-        padding: 15px;
+        display: grid; grid-template-columns: 1fr 1fr;
+        margin-bottom: 30px; background: #f9f9f9;
+        border: 1px solid #eee; padding: 15px;
     }
-
     .signature-section {
-        margin-top: 100px;
-        width: 300px;
-        text-align: center;
-        page-break-inside: avoid;
+        margin-top: 100px; width: 300px;
+        text-align: center; page-break-inside: avoid;
     }
-
-    .signature-line {
-        border-top: 1px solid black;
-        margin-bottom: 10px;
-    }
-
+    .signature-line { border-top: 1px solid black; margin-bottom: 10px; }
     .report-body h3 {
-        color: var(--primary-dark);
-        border-bottom: 1px solid #eee;
-        padding-bottom: 5px;
-        margin-top: 30px;
+        color: var(--primary-dark); border-bottom: 1px solid #eee;
+        padding-bottom: 5px; margin-top: 30px;
     }
 }
